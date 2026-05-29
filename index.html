@@ -38,189 +38,82 @@
     .app-bar-logo { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
     .app-bar-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.3); }
     .app-bar-title { font-size: 18px; font-weight: 500; flex: 1; }
+    .app-bar-sub { font-size: 13px; opacity: 0.75; }
     .avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
 
-    /* MAIN CONTENT */
-    .content { flex: 1; padding: 32px; max-width: 960px; margin: 0 auto; width: 100%; }
-    .page-header { margin-bottom: 28px; }
-    .page-title { font-size: 24px; font-weight: 500; color: var(--on-surface); }
-    .page-sub { font-size: 14px; color: var(--on-surface-variant); margin-top: 4px; }
+    /* CONTENT */
+    .content { flex: 1; padding: 32px; max-width: 900px; margin: 0 auto; width: 100%; }
 
-    /* POLICY SUMMARY BAR */
-    .policy-summary {
-      background: var(--primary-container);
-      border-radius: 16px;
-      padding: 18px 24px;
-      display: flex;
-      gap: 32px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    .summary-item { display: flex; flex-direction: column; gap: 4px; }
-    .summary-label { font-size: 11px; font-weight: 500; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
-    .summary-value { font-size: 16px; font-weight: 500; color: var(--on-primary-container); }
-
-    /* BREAKDOWN CONTAINER */
-    .breakdown-container {
-      background: var(--surface);
-      border: 1px solid var(--outline-variant);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .breakdown-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--outline-variant);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .breakdown-title { font-size: 16px; font-weight: 500; color: var(--on-surface); }
-    .breakdown-sub { font-size: 13px; color: var(--on-surface-variant); margin-top: 2px; }
+    /* SECTION CARD */
+    .card { background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 16px; overflow: hidden; margin-bottom: 16px; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--outline-variant); }
+    .card-title { font-size: 16px; font-weight: 500; }
+    .card-sub { font-size: 13px; color: var(--on-surface-variant); margin-top: 2px; }
 
     /* YEAR ACCORDION */
-    .year-item {
-      border-bottom: 1px solid var(--outline-variant);
-      overflow: hidden;
-      transition: background 0.15s;
-    }
-    .year-item:last-child { border-bottom: none; }
-
     .year-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.15s;
-    }
-    .year-header:hover { background: var(--surface-container-low); }
-    .year-header.active { background: var(--surface-container-low); }
-
-    .year-label { font-size: 15px; font-weight: 500; color: var(--on-surface); }
-    .year-meta { display: flex; align-items: center; gap: 12px; }
-    .year-badge {
-      font-size: 11px; font-weight: 500;
-      padding: 3px 10px; border-radius: 20px;
-    }
-    .year-badge.active { background: var(--success-container); color: #002810; }
-    .year-badge.future { background: var(--surface-container-high); color: var(--on-surface-variant); }
-    .year-badge.dbr { background: var(--warning-container); color: #3D2C00; }
-    .year-chevron {
-      font-size: 20px;
-      color: var(--on-surface-variant);
-      transition: transform 0.2s;
-    }
-    .year-chevron.open { transform: rotate(180deg); }
-
-    /* YEAR BODY */
-    .year-body {
-      display: none;
-      padding: 20px 24px 24px;
-      background: var(--surface-container-low);
-      border-top: 1px solid var(--outline-variant);
-    }
-    .year-body.open { display: block; }
-
-    /* FORM FIELDS */
-    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .field-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .field-full { margin-bottom: 16px; }
-
-    .form-field { display: flex; flex-direction: column; position: relative; }
-    .form-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--on-surface-variant);
-      position: absolute;
-      top: -8px;
-      left: 12px;
-      background: var(--surface-container-low);
-      padding: 0 4px;
-      z-index: 1;
-    }
-    .form-input, .form-select {
-      padding: 14px 16px;
-      border: 1.5px solid var(--outline);
-      border-radius: 8px;
-      font-size: 14px;
-      font-family: 'Roboto', sans-serif;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; cursor: pointer;
       background: var(--surface);
-      color: var(--on-surface);
-      outline: none;
-      transition: border-color 0.15s;
+      border-bottom: 1px solid var(--outline-variant);
+      user-select: none;
     }
-    .form-input:focus, .form-select:focus { border-color: var(--primary); }
-    .form-input.disabled, .form-select.disabled {
-      background: var(--surface-container);
-      color: var(--on-surface-variant);
-      cursor: not-allowed;
-      border-color: var(--outline-variant);
-    }
-    .form-helper { font-size: 11px; color: var(--on-surface-variant); margin-top: 5px; padding-left: 4px; }
-    .form-helper.error { color: var(--error); }
+    .year-label { font-size: 15px; font-weight: 500; }
+    .year-chevron { font-size: 22px; color: var(--on-surface-variant); transition: transform 0.2s; }
+    .year-chevron.open { transform: rotate(180deg); }
+    .year-body { padding: 24px; background: var(--surface-container-low); }
 
-    /* PREFIX INPUT */
+    /* FORM */
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .form-field { display: flex; flex-direction: column; position: relative; }
+    .form-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); position: absolute; top: -8px; left: 12px; background: var(--surface-container-low); padding: 0 4px; z-index: 1; }
+    .form-input, .form-select { padding: 14px 16px; border: 1.5px solid var(--outline); border-radius: 8px; font-size: 14px; font-family: 'Roboto', sans-serif; background: var(--surface); color: var(--on-surface); outline: none; transition: border-color 0.15s; width: 100%; }
+    .form-input:focus { border-color: var(--primary); }
+    .form-input.disabled { background: var(--surface-container); color: var(--on-surface-variant); cursor: not-allowed; border-color: var(--outline-variant); }
+    .form-helper { font-size: 11px; color: var(--on-surface-variant); margin-top: 5px; padding-left: 4px; }
     .input-prefix-wrap { position: relative; }
-    .input-prefix {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      color: var(--on-surface-variant);
-      pointer-events: none;
-    }
+    .input-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--on-surface-variant); pointer-events: none; }
     .input-prefix-wrap .form-input { padding-left: 26px; }
 
-    /* SECTION DIVIDER */
-    .section-divider {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin: 20px 0 14px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--primary-container);
-    }
+    /* DBR ROW — field + button + status inline */
+    .dbr-row { display: flex; align-items: flex-start; gap: 12px; }
+    .dbr-field { flex: 1; }
+    .dbr-actions { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; flex-shrink: 0; }
 
-    /* DBR ALERT */
-    .dbr-alert {
-      background: var(--warning-container);
-      border: 1px solid var(--warning);
-      border-radius: 10px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .dbr-alert .material-symbols-outlined { color: var(--warning); font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .dbr-alert-text { font-size: 13px; color: #3D2C00; line-height: 1.5; }
-    .dbr-alert-title { font-weight: 500; margin-bottom: 2px; }
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; background: var(--primary); color: #fff; border: none; border-radius: 20px; font-size: 13px; font-weight: 500; font-family: 'Roboto', sans-serif; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outlined { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: transparent; color: var(--primary); border: 1.5px solid var(--primary); border-radius: 20px; font-size: 12px; font-weight: 500; font-family: 'Roboto', sans-serif; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .btn-outlined:hover { background: var(--primary-container); }
+    .btn-text { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; background: transparent; color: var(--primary); border: none; border-radius: 8px; font-size: 12px; font-weight: 500; font-family: 'Roboto', sans-serif; cursor: pointer; }
+    .btn-text:hover { background: var(--primary-container); }
 
-    /* TOTALS ROW */
-    .totals-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--outline-variant);
-      flex-wrap: wrap;
-    }
-    .total-item {
-      flex: 1;
-      min-width: 140px;
-      background: var(--surface);
-      border: 1px solid var(--outline-variant);
-      border-radius: 12px;
-      padding: 14px 18px;
-    }
-    .total-label { font-size: 11px; color: var(--on-surface-variant); margin-bottom: 4px; }
-    .total-value { font-size: 20px; font-weight: 500; color: var(--on-surface); }
-    .total-value.blue { color: var(--primary); }
-    .total-value.green { color: var(--success); }
+    /* SENT STATUS CHIP */
+    .status-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+    .status-chip.sent { background: var(--success-container); color: #002810; }
+    .status-chip.not-sent { background: var(--surface-container-high); color: var(--on-surface-variant); }
+    .status-chip .material-symbols-outlined { font-size: 14px; }
+
+    /* ══ CONFIRM MODAL ══ */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: var(--surface); border-radius: 20px; box-shadow: 0 24px 64px rgba(0,0,0,0.2); width: 460px; max-width: 92vw; transform: scale(0.93) translateY(12px); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); overflow: hidden; }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+    .modal-header { background: var(--primary); color: #fff; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; }
+    .modal-header h3 { font-size: 15px; font-weight: 500; margin: 0; }
+    .modal-close { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: 'Material Symbols Outlined'; font-size: 18px; line-height: 1; }
+    .modal-close:hover { background: rgba(255,255,255,0.28); }
+    .modal-body { padding: 24px; }
+    .modal-body p { font-size: 14px; color: var(--on-surface); line-height: 1.6; margin-bottom: 16px; }
+    .modal-detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--outline-variant); font-size: 13px; }
+    .modal-detail-row:last-of-type { border-bottom: none; }
+    .modal-detail-label { color: var(--on-surface-variant); }
+    .modal-footer { padding: 16px 24px; border-top: 1px solid var(--outline-variant); display: flex; gap: 10px; justify-content: flex-end; }
+
+    /* SUCCESS TOAST */
+    .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1A1B1F; color: #fff; padding: 12px 24px; border-radius: 24px; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 200; white-space: nowrap; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast .material-symbols-outlined { font-size: 18px; color: var(--success); }
 
     /* PROTO BANNER */
     .proto-banner { background: var(--primary-container); border-top: 1px solid var(--outline-variant); padding: 10px 24px; display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--on-primary-container); flex-shrink: 0; }
@@ -233,278 +126,196 @@
     <span class="app-bar-logo">ILIA</span>
     <div class="app-bar-divider"></div>
     <span class="app-bar-title">Yearly Policy Breakdown</span>
+    <span class="app-bar-sub">Admin View</span>
     <div class="avatar">JA</div>
   </div>
 
   <div class="content">
-    <div class="page-header">
-      <div class="page-title">Yearly Policy Breakdown</div>
-      <div class="page-sub">Policy LS22972246 · John Smith · North American Kai-Zen IUL</div>
-    </div>
 
-    <!-- POLICY SUMMARY -->
-    <div class="policy-summary">
-      <div class="summary-item">
-        <span class="summary-label">Policy Number</span>
-        <span class="summary-value">LS22972246</span>
-      </div>
-      <div class="summary-item">
-        <span class="summary-label">Insured</span>
-        <span class="summary-value">John Smith</span>
-      </div>
-      <div class="summary-item">
-        <span class="summary-label">Issue Date</span>
-        <span class="summary-value">04/15/2026</span>
-      </div>
-      <div class="summary-item">
-        <span class="summary-label">Current Year</span>
-        <span class="summary-value">Year 1</span>
-      </div>
-      <div class="summary-item">
-        <span class="summary-label">Annual Premium</span>
-        <span class="summary-value">$43,550</span>
-      </div>
-      <div class="summary-item">
-        <span class="summary-label">Face Value</span>
-        <span class="summary-value">$1,269,884</span>
-      </div>
-    </div>
-
-    <!-- BREAKDOWN CONTAINER -->
-    <div class="breakdown-container">
-      <div class="breakdown-header">
-        <div>
-          <div class="breakdown-title">Yearly Policy Breakdown</div>
-          <div class="breakdown-sub">Click any year to expand and edit details · Years 11–15 eligible for Death Benefit Reduction</div>
-        </div>
+    <div class="card">
+      <!-- YEAR HEADER -->
+      <div class="year-header" onclick="toggleYear(this)">
+        <span class="year-label">2026 – 2027 &nbsp;·&nbsp; Year 1</span>
+        <span class="material-symbols-outlined year-chevron open">expand_more</span>
       </div>
 
-      <!-- YEAR 1 — expanded by default -->
-      <div class="year-item">
-        <div class="year-header active" onclick="toggleYear(this)">
-          <span class="year-label">2026 – 2027 &nbsp;·&nbsp; Year 1</span>
-          <div class="year-meta">
-            <span class="year-badge active">Current year</span>
-            <span class="material-symbols-outlined year-chevron open">expand_more</span>
+      <!-- YEAR BODY -->
+      <div class="year-body" id="yearBody">
+        <div class="field-grid">
+          <!-- Client Age -->
+          <div class="form-field">
+            <span class="form-label">Client Age</span>
+            <input class="form-input disabled" type="text" value="45" disabled/>
+          </div>
+          <!-- Contribution Frequency -->
+          <div class="form-field">
+            <span class="form-label">Contribution Frequency</span>
+            <select class="form-select">
+              <option selected>Annual</option>
+              <option>Semi-Annual</option>
+              <option>Quarterly</option>
+              <option>Monthly</option>
+            </select>
           </div>
         </div>
-        <div class="year-body open">
-          <div class="field-grid">
-            <div class="form-field">
-              <span class="form-label">Client Age</span>
-              <input class="form-input disabled" type="text" value="45" disabled/>
-            </div>
-            <div class="form-field">
-              <span class="form-label">Contribution Frequency</span>
-              <select class="form-select">
-                <option selected>Annual</option>
-                <option>Semi-Annual</option>
-                <option>Quarterly</option>
-                <option>Monthly</option>
-              </select>
-            </div>
-          </div>
-          <div class="field-grid">
-            <div class="form-field">
-              <span class="form-label">Annual Premium</span>
-              <div class="input-prefix-wrap">
-                <span class="input-prefix">$</span>
-                <input class="form-input" type="text" value="43,550.00"/>
-              </div>
-            </div>
-            <div class="form-field">
-              <span class="form-label">Loan Amount (Tranche)</span>
-              <div class="input-prefix-wrap">
-                <span class="input-prefix">$</span>
-                <input class="form-input" type="text" value="43,550.00"/>
-              </div>
-            </div>
-          </div>
-          <div class="field-grid">
+
+        <!-- DBR FIELD + BUTTON ROW -->
+        <div class="dbr-row">
+          <div class="dbr-field">
             <div class="form-field">
               <span class="form-label">Death Benefit Reductions</span>
               <div class="input-prefix-wrap">
                 <span class="input-prefix">$</span>
-                <input class="form-input" type="text" value="0.00"/>
+                <input class="form-input" id="dbrAmount" type="text" value="0.00"/>
               </div>
               <span class="form-helper">Value cannot be negative.</span>
             </div>
-            <div class="form-field">
-              <span class="form-label">Current Death Benefit</span>
-              <div class="input-prefix-wrap">
-                <span class="input-prefix">$</span>
-                <input class="form-input disabled" type="text" value="1,269,884.00" disabled/>
-              </div>
-            </div>
           </div>
-          <div class="totals-row">
-            <div class="total-item">
-              <div class="total-label">Cumulative Premium</div>
-              <div class="total-value blue">$43,550</div>
-            </div>
-            <div class="total-item">
-              <div class="total-label">Cumulative Loan</div>
-              <div class="total-value blue">$43,550</div>
-            </div>
-            <div class="total-item">
-              <div class="total-label">Death Benefit</div>
-              <div class="total-value green">$1,269,884</div>
-            </div>
-            <div class="total-item">
-              <div class="total-label">Policy Status</div>
-              <div class="total-value" style="font-size:14px;margin-top:4px;"><span style="background:var(--success-container);color:#002810;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;">In Force</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- YEARS 2-10 collapsed -->
-      <div class="year-item">
-        <div class="year-header" onclick="toggleYear(this)">
-          <span class="year-label">2027 – 2028 &nbsp;·&nbsp; Year 2</span>
-          <div class="year-meta">
-            <span class="year-badge future">Upcoming</span>
-            <span class="material-symbols-outlined year-chevron">expand_more</span>
-          </div>
-        </div>
-        <div class="year-body">
-          <div class="field-grid">
-            <div class="form-field"><span class="form-label">Client Age</span><input class="form-input disabled" type="text" value="46" disabled/></div>
-            <div class="form-field"><span class="form-label">Contribution Frequency</span><select class="form-select"><option selected>Annual</option><option>Semi-Annual</option><option>Quarterly</option><option>Monthly</option></select></div>
-          </div>
-          <div class="field-grid">
-            <div class="form-field"><span class="form-label">Annual Premium</span><div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input" type="text" value="43,550.00"/></div></div>
-            <div class="form-field"><span class="form-label">Loan Amount (Tranche)</span><div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input" type="text" value="43,550.00"/></div></div>
-          </div>
-          <div class="field-grid">
-            <div class="form-field"><span class="form-label">Death Benefit Reductions</span><div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input" type="text" value="0.00"/></div><span class="form-helper">Value cannot be negative.</span></div>
-            <div class="form-field"><span class="form-label">Current Death Benefit</span><div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input disabled" type="text" value="1,269,884.00" disabled/></div></div>
-          </div>
-        </div>
-      </div>
+          <!-- ACTIONS: button + status -->
+          <div class="dbr-actions" style="padding-top:6px;">
+            <!-- Default: not sent yet -->
+            <div id="notSentState">
+              <button class="btn-primary" onclick="openConfirm()">
+                <span class="material-symbols-outlined" style="font-size:16px">send</span>
+                Send DBR Notice
+              </button>
+            </div>
 
-      <!-- Repeat pattern years 3-10 collapsed -->
-      <div class="year-item" id="years-3-10">
-        <div class="year-header" onclick="toggleYear(this)">
-          <span class="year-label">2028 – 2035 &nbsp;·&nbsp; Years 3 – 10</span>
-          <div class="year-meta">
-            <span class="year-badge future">Future</span>
-            <span class="material-symbols-outlined year-chevron">expand_more</span>
+            <!-- After sent: status chip + resend -->
+            <div id="sentState" style="display:none; flex-direction:column; gap:6px; align-items:flex-start;">
+              <span class="status-chip sent">
+                <span class="material-symbols-outlined">check_circle</span>
+                Notice Sent
+              </span>
+              <div style="font-size:11px;color:var(--on-surface-variant);" id="sentTimestamp"></div>
+              <button class="btn-text" onclick="openResendConfirm()">
+                <span class="material-symbols-outlined" style="font-size:14px">refresh</span>
+                Resend Notice
+              </button>
+            </div>
           </div>
         </div>
-        <div class="year-body">
-          <div style="padding:12px 0;color:var(--on-surface-variant);font-size:14px;text-align:center;">
-            Years 3–10 follow the same pattern. Premium finance continues annually at $43,550/year.
-            No DBR available until Year 11.
-          </div>
-        </div>
-      </div>
 
-      <!-- YEAR 11 — DBR eligible -->
-      <div class="year-item">
-        <div class="year-header" onclick="toggleYear(this)">
-          <span class="year-label">2036 – 2037 &nbsp;·&nbsp; Year 11</span>
-          <div class="year-meta">
-            <span class="year-badge dbr">DBR Eligible</span>
-            <span class="material-symbols-outlined year-chevron">expand_more</span>
-          </div>
-        </div>
-        <div class="year-body">
-          <div class="dbr-alert">
-            <span class="material-symbols-outlined">warning</span>
-            <div class="dbr-alert-text">
-              <div class="dbr-alert-title">Death Benefit Reduction Available</div>
-              This policy becomes eligible for a Death Benefit Reduction (DBR) in Year 11.
-              The client may elect to reduce the death benefit to increase cash value efficiency.
-              A signing workflow will be triggered 90 days before the policy anniversary.
-            </div>
-          </div>
-          <div class="field-grid">
-            <div class="form-field"><span class="form-label">Client Age</span><input class="form-input disabled" type="text" value="56" disabled/></div>
-            <div class="form-field"><span class="form-label">Contribution Frequency</span><select class="form-select"><option selected>Annual</option><option>Semi-Annual</option><option>Quarterly</option><option>Monthly</option></select></div>
-          </div>
-          <div class="field-grid">
-            <div class="form-field"><span class="form-label">Annual Premium</span><div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input" type="text" value="43,550.00"/></div></div>
-            <div class="form-field"><span class="form-label">Loan Amount (Tranche)</span><div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input" type="text" value="43,550.00"/></div></div>
-          </div>
-          <div class="section-divider">Death Benefit Reduction</div>
-          <div class="field-grid">
-            <div class="form-field">
-              <span class="form-label">Death Benefit Reductions</span>
-              <div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input" type="text" value="0.00" placeholder="Enter reduction amount"/></div>
-              <span class="form-helper">Value cannot be negative. Max: Current Death Benefit minus Surrender Value.</span>
-            </div>
-            <div class="form-field">
-              <span class="form-label">Revised Death Benefit</span>
-              <div class="input-prefix-wrap"><span class="input-prefix">$</span><input class="form-input disabled" type="text" value="1,269,884.00" disabled/></div>
-              <span class="form-helper">Auto-calculated after reduction entry.</span>
-            </div>
-          </div>
-          <div class="field-grid">
-            <div class="form-field">
-              <span class="form-label">DBR Election Status</span>
-              <select class="form-select">
-                <option>Not yet determined</option>
-                <option>Yes — Reduce death benefit</option>
-                <option>No — Do not reduce</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <span class="form-label">DBR Signing Status</span>
-              <select class="form-select disabled" disabled>
-                <option>Pending election</option>
-                <option>Awaiting client signature</option>
-                <option>Awaiting settlor signature</option>
-                <option>Awaiting trustee signature</option>
-                <option>Awaiting bank signature</option>
-                <option>Complete</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div><!-- /year-body -->
+    </div><!-- /card -->
 
-      <!-- YEARS 12-15 DBR eligible collapsed -->
-      <div class="year-item">
-        <div class="year-header" onclick="toggleYear(this)">
-          <span class="year-label">2037 – 2041 &nbsp;·&nbsp; Years 12 – 15</span>
-          <div class="year-meta">
-            <span class="year-badge dbr">DBR Eligible</span>
-            <span class="material-symbols-outlined year-chevron">expand_more</span>
-          </div>
-        </div>
-        <div class="year-body">
-          <div class="dbr-alert">
-            <span class="material-symbols-outlined">info</span>
-            <div class="dbr-alert-text">
-              <div class="dbr-alert-title">Years 12–15 — DBR Window</div>
-              Death Benefit Reduction remains available through Year 15. After Year 15 DBR is no longer available.
-              Each year follows the same DBR election and signing workflow as Year 11.
-            </div>
-          </div>
-          <div style="padding:8px 0;color:var(--on-surface-variant);font-size:14px;text-align:center;">
-            Years 12–15 expand with the same fields as Year 11 including DBR election and signing status.
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /breakdown-container -->
   </div><!-- /content -->
+
+  <!-- ══ CONFIRM SEND MODAL ══ -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Confirm — Send DBR Notice</h3>
+        <button class="modal-close" onclick="closeModal('confirmModal')">close</button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to send a <strong>Death Benefit Reduction notice</strong> to the client. Please confirm the details below before sending.</p>
+        <div class="modal-detail-row"><span class="modal-detail-label">Policy</span><strong>LS22972246</strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Client</span><strong>John Smith</strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Policy Year</span><strong>Year 1 · 2026–2027</strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">DBR Amount</span><strong id="modalDBRAmount">$0.00</strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Send to</span><strong>john.smith@email.com</strong></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outlined" onclick="closeModal('confirmModal')">Cancel</button>
+        <button class="btn-primary" onclick="confirmSend()">
+          <span class="material-symbols-outlined" style="font-size:16px">send</span>
+          Confirm Send
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RESEND CONFIRM MODAL ══ -->
+  <div class="modal-overlay" id="resendModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Confirm — Resend DBR Notice</h3>
+        <button class="modal-close" onclick="closeModal('resendModal')">close</button>
+      </div>
+      <div class="modal-body">
+        <p>A DBR notice was already sent for this policy year. Are you sure you want to <strong>resend</strong> the notice to the client?</p>
+        <div class="modal-detail-row"><span class="modal-detail-label">Policy</span><strong>LS22972246</strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Client</span><strong>John Smith</strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Originally sent</span><strong id="resendOriginalTime"></strong></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Send to</span><strong>john.smith@email.com</strong></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outlined" onclick="closeModal('resendModal')">Cancel</button>
+        <button class="btn-primary" onclick="confirmResend()">
+          <span class="material-symbols-outlined" style="font-size:16px">refresh</span>
+          Resend Notice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="material-symbols-outlined">check_circle</span>
+    <span id="toastMsg">DBR Notice sent successfully</span>
+  </div>
 
   <div class="proto-banner">
     <span class="material-symbols-outlined" style="font-size:16px;color:var(--primary)">construction</span>
-    <span><strong>Prototype</strong> — Yearly Policy Breakdown · ILIA Design Kit v1.0 · NIW / Simplicity Group</span>
+    <span><strong>Prototype</strong> — Yearly Policy Breakdown · Admin View · ILIA Design Kit v1.0 · NIW / Simplicity Group</span>
   </div>
 
   <script>
+    let sentTime = null;
+
     function toggleYear(header) {
-      const body = header.nextElementSibling;
+      const body = document.getElementById('yearBody');
       const chevron = header.querySelector('.year-chevron');
-      const isOpen = body.classList.contains('open');
-      body.classList.toggle('open', !isOpen);
+      const isOpen = body.style.display !== 'none';
+      body.style.display = isOpen ? 'none' : 'block';
       chevron.classList.toggle('open', !isOpen);
-      header.classList.toggle('active', !isOpen);
     }
+
+    function openConfirm() {
+      const amt = document.getElementById('dbrAmount').value || '0.00';
+      document.getElementById('modalDBRAmount').textContent = '$ ' + amt;
+      document.getElementById('confirmModal').classList.add('open');
+    }
+
+    function openResendConfirm() {
+      document.getElementById('resendOriginalTime').textContent = sentTime || '—';
+      document.getElementById('resendModal').classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function confirmSend() {
+      closeModal('confirmModal');
+      sentTime = new Date().toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
+      document.getElementById('sentTimestamp').textContent = 'Sent ' + sentTime;
+      document.getElementById('notSentState').style.display = 'none';
+      const ss = document.getElementById('sentState');
+      ss.style.display = 'flex';
+      showToast('DBR Notice sent successfully');
+    }
+
+    function confirmResend() {
+      closeModal('resendModal');
+      sentTime = new Date().toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
+      document.getElementById('sentTimestamp').textContent = 'Resent ' + sentTime;
+      showToast('DBR Notice resent successfully');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // Close modals on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(o => {
+      o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+    });
   </script>
 </body>
 </html>
