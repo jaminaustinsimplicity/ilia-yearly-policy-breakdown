@@ -289,7 +289,59 @@
         <div class="modal-row"><span class="modal-row-label">Policy</span><strong>LS22972246</strong></div>
         <div class="modal-row"><span class="modal-row-label">Client</span><strong>John Smith</strong></div>
         <div class="modal-row"><span class="modal-row-label">Originally sent</span><strong id="resendTime"></strong></div>
-        <div class="modal-row"><span class="modal-row-label">Send to</span><strong>john.smith@email.com</strong></div>
+
+        <!-- Scenario toggle -->
+        <div class="scenario-bar" style="margin-top:20px;">
+          <button class="scenario-btn active" onclick="setResendScenario('same', this)">Client = Settlor</button>
+          <button class="scenario-btn" onclick="setResendScenario('separate', this)">Separate Settlor</button>
+        </div>
+
+        <!-- SCENARIO A: Client IS the Settlor -->
+        <div id="resendScenarioSame">
+          <div class="signer-section">
+            <div class="signer-section-title">Expected Signers</div>
+            <div class="signer-card same-person">
+              <span class="signer-badge combined">
+                <span class="material-symbols-outlined" style="font-size:12px">person</span>
+                Client & Settlor — Same Person
+              </span>
+              <div class="signer-row"><span class="signer-label">Name</span><span class="signer-value">John Smith</span></div>
+              <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">john.smith@email.com</span></div>
+              <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">DBR Election + Hold Harmless</span></div>
+              <div class="same-note">
+                <span class="material-symbols-outlined">info</span>
+                Client is also the Settlor — both sections sent in one signing ceremony.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENARIO B: Separate Settlor -->
+        <div id="resendScenarioSeparate" style="display:none;">
+          <div class="signer-section">
+            <div class="signer-section-title">Expected Signers</div>
+            <div class="signer-card">
+              <span class="signer-badge client">
+                <span class="material-symbols-outlined" style="font-size:12px">person</span>
+                Client Signer
+              </span>
+              <div class="signer-row"><span class="signer-label">Name</span><span class="signer-value">John Smith</span></div>
+              <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">john.smith@email.com</span></div>
+              <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">DBR Election Form</span></div>
+            </div>
+            <div class="signer-card">
+              <span class="signer-badge settlor">
+                <span class="material-symbols-outlined" style="font-size:12px">account_balance</span>
+                Settlor — Authorized Signer
+              </span>
+              <div class="signer-row"><span class="signer-label">Settlor Name</span><span class="signer-value">Smith Family Trust</span></div>
+              <div class="signer-row"><span class="signer-label">Authorized Signer</span><span class="signer-value">Robert Smith (Trustee)</span></div>
+              <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">robert.smith@email.com</span></div>
+              <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">Hold Harmless & Indemnification</span></div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button class="btn-outlined" onclick="closeModal('resendModal')">Cancel</button>
@@ -315,10 +367,16 @@
     let sentTime = null;
 
     function setScenario(type, btn) {
-      document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#confirmModal .scenario-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('scenarioSame').style.display = type === 'same' ? 'block' : 'none';
       document.getElementById('scenarioSeparate').style.display = type === 'separate' ? 'block' : 'none';
+    }
+    function setResendScenario(type, btn) {
+      document.querySelectorAll('#resendModal .scenario-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('resendScenarioSame').style.display = type === 'same' ? 'block' : 'none';
+      document.getElementById('resendScenarioSeparate').style.display = type === 'separate' ? 'block' : 'none';
     }
 
     function openConfirm() {
