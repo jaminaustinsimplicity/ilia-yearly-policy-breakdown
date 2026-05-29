@@ -103,6 +103,29 @@
     .toast .material-symbols-outlined{font-size:18px;color:var(--success);}
 
     .proto-banner{background:var(--primary-container);border-top:1px solid var(--outline-variant);padding:10px 24px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--on-primary-container);flex-shrink:0;}
+
+    /* BACK BUTTON + BREADCRUMB */
+    .breadcrumb-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;min-height:36px;}
+    .back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:transparent;color:var(--primary);border:1.5px solid var(--primary);border-radius:20px;font-size:13px;font-weight:500;font-family:'Roboto',sans-serif;cursor:pointer;transition:background 0.15s;}
+    .back-btn:hover{background:var(--primary-container);}
+    .back-btn .material-symbols-outlined{font-size:18px;}
+    .breadcrumb-trail{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--on-surface-variant);}
+    .crumb{color:var(--on-surface-variant);}
+    .crumb.active{color:var(--on-surface);font-weight:500;}
+    .crumb.link{color:var(--primary);cursor:pointer;}
+    .crumb.link:hover{text-decoration:underline;}
+    .crumb-sep{font-size:16px;color:var(--outline-variant);}
+
+    /* SENT STATE VIEW */
+    .sent-view{background:var(--surface);border:1px solid var(--outline-variant);border-radius:16px;padding:32px;text-align:center;max-width:480px;margin:0 auto;}
+    .sent-view-icon{width:64px;height:64px;border-radius:50%;background:var(--success-container);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+    .sent-view-icon .material-symbols-outlined{font-size:32px;color:var(--success);}
+    .sent-view-title{font-size:18px;font-weight:500;margin-bottom:8px;}
+    .sent-view-sub{font-size:14px;color:var(--on-surface-variant);line-height:1.6;margin-bottom:24px;}
+    .sent-view-detail{background:var(--surface-container-low);border-radius:10px;padding:14px 18px;text-align:left;margin-bottom:20px;}
+    .sent-view-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--outline-variant);}
+    .sent-view-row:last-child{border-bottom:none;}
+    .sent-view-label{color:var(--on-surface-variant);}
   </style>
 </head>
 <body>
@@ -116,6 +139,23 @@
   </div>
 
   <div class="content">
+
+    <!-- BREADCRUMB / BACK NAV -->
+    <div id="breadcrumb" class="breadcrumb-bar">
+      <button class="back-btn" id="backBtn" onclick="goBack()" style="display:none;">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back
+      </button>
+      <div class="breadcrumb-trail" id="breadcrumbTrail">
+        <span class="crumb active">Yearly Policy Breakdown</span>
+      </div>
+    </div>
+
+    <!-- STATES WRAPPER -->
+    <div id="stateWrapper">
+
+    <!-- STATE 1: Main form -->
+    <div id="state1">
     <div class="section-title">Admin Sends DBR Notice</div>
 
     <div class="field-grid">
@@ -164,6 +204,9 @@
       </div>
     </div>
   </div>
+
+    </div><!-- /state1 -->
+    </div><!-- /stateWrapper -->
 
   <!-- CONFIRM SEND MODAL -->
   <div class="modal-overlay" id="confirmModal">
@@ -365,6 +408,47 @@
 
   <script>
     let sentTime = null;
+    let stateHistory = ['state1'];
+    let breadcrumbHistory = ['Yearly Policy Breakdown'];
+
+    function goBack() {
+      if (stateHistory.length <= 1) return;
+      // Hide current state
+      const currentState = stateHistory[stateHistory.length - 1];
+      document.getElementById(currentState).style.display = 'none';
+      stateHistory.pop();
+      breadcrumbHistory.pop();
+      // Show previous state
+      const prevState = stateHistory[stateHistory.length - 1];
+      document.getElementById(prevState).style.display = 'block';
+      updateBreadcrumb();
+    }
+
+    function updateBreadcrumb() {
+      const trail = document.getElementById('breadcrumbTrail');
+      const backBtn = document.getElementById('backBtn');
+      // Show back button only if not on first state
+      backBtn.style.display = stateHistory.length > 1 ? 'inline-flex' : 'none';
+      // Build breadcrumb
+      trail.innerHTML = breadcrumbHistory.map((crumb, i) => {
+        const isLast = i === breadcrumbHistory.length - 1;
+        const sep = i > 0 ? '<span class="crumb-sep">›</span>' : '';
+        return sep + `<span class="crumb ${isLast ? 'active' : 'link'}" onclick="${!isLast ? `jumpTo(${i})` : ''}">${crumb}</span>`;
+      }).join('');
+    }
+
+    function jumpTo(index) {
+      // Navigate back to a specific breadcrumb point
+      while (stateHistory.length > index + 1) {
+        const currentState = stateHistory[stateHistory.length - 1];
+        document.getElementById(currentState).style.display = 'none';
+        stateHistory.pop();
+        breadcrumbHistory.pop();
+      }
+      const targetState = stateHistory[stateHistory.length - 1];
+      document.getElementById(targetState).style.display = 'block';
+      updateBreadcrumb();
+    }
 
     function setScenario(type, btn) {
       document.querySelectorAll('#confirmModal .scenario-btn').forEach(b => b.classList.remove('active'));
@@ -392,10 +476,40 @@
     function confirmSend() {
       closeModal('confirmModal');
       sentTime = new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
-      document.getElementById('sentTimestamp').textContent = 'Sent ' + sentTime;
+      // Navigate to sent confirmation state
+      document.getElementById('state1').style.display = 'none';
+      // Create state2 if not exists
+      if (!document.getElementById('state2')) {
+        const s2 = document.createElement('div');
+        s2.id = 'state2';
+        s2.innerHTML = `
+          <div class="sent-view">
+            <div class="sent-view-icon"><span class="material-symbols-outlined">check_circle</span></div>
+            <div class="sent-view-title">DBR Notice Sent Successfully</div>
+            <div class="sent-view-sub">The Death Benefit Reduction notice has been sent to the client and settlor for signature.</div>
+            <div class="sent-view-detail">
+              <div class="sent-view-row"><span class="sent-view-label">Sent at</span><strong>${sentTime}</strong></div>
+              <div class="sent-view-row"><span class="sent-view-label">Policy</span><strong>LS22972246</strong></div>
+              <div class="sent-view-row"><span class="sent-view-label">Client notified</span><strong>john.smith@email.com</strong></div>
+              <div class="sent-view-row"><span class="sent-view-label">Settlor notified</span><strong>robert.smith@email.com</strong></div>
+              <div class="sent-view-row"><span class="sent-view-label">Status</span><strong style="color:var(--success)">Awaiting signatures</strong></div>
+            </div>
+            <button class="btn-outlined" onclick="jumpTo(0)" style="width:100%;justify-content:center;">
+              <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span>
+              Back to Policy Breakdown
+            </button>
+          </div>`;
+        document.getElementById('stateWrapper').appendChild(s2);
+      } else {
+        document.getElementById('state2').style.display = 'block';
+      }
+      stateHistory.push('state2');
+      breadcrumbHistory.push('Notice Sent');
+      updateBreadcrumb();
+      // Also update main form state
       document.getElementById('notSentState').style.display = 'none';
       document.getElementById('sentState').style.display = 'flex';
-      showToast('DBR Notice sent successfully');
+      document.getElementById('sentTimestamp').textContent = 'Sent ' + sentTime;
     }
     function confirmResend() {
       closeModal('resendModal');
