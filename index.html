@@ -60,7 +60,6 @@
     .status-chip .material-symbols-outlined{font-size:14px;}
     .sent-timestamp{font-size:11px;color:var(--on-surface-variant);margin-top:2px;}
 
-    /* MODAL */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;}
     .modal-overlay.open{opacity:1;pointer-events:all;}
     .modal{background:var(--surface);border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,0.2);width:520px;max-width:94vw;transform:scale(0.93) translateY(12px);transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1);overflow:hidden;max-height:90vh;display:flex;flex-direction:column;}
@@ -74,9 +73,6 @@
     .modal-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--outline-variant);font-size:13px;gap:16px;}
     .modal-row:last-of-type{border-bottom:none;}
     .modal-row-label{color:var(--on-surface-variant);flex-shrink:0;}
-    .modal-row-value{text-align:right;}
-
-    /* SIGNER SECTION */
     .signer-section{margin-top:16px;}
     .signer-section-title{font-size:11px;font-weight:500;color:var(--primary);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--primary-container);}
     .signer-card{background:var(--surface-container-low);border:1px solid var(--outline-variant);border-radius:10px;padding:12px 16px;margin-bottom:10px;}
@@ -90,42 +86,15 @@
     .signer-badge.combined{background:var(--success-container);color:#002810;}
     .same-note{font-size:11px;color:#002810;display:flex;align-items:center;gap:4px;margin-top:6px;}
     .same-note .material-symbols-outlined{font-size:14px;color:var(--success);}
-
-    .modal-footer{padding:16px 24px;border-top:1px solid var(--outline-variant);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;}
-
-    /* SCENARIO TOGGLE */
     .scenario-bar{display:flex;gap:8px;margin-bottom:20px;background:var(--surface-container);border-radius:10px;padding:4px;}
     .scenario-btn{flex:1;padding:8px 12px;border:none;border-radius:8px;font-size:12px;font-weight:500;font-family:'Roboto',sans-serif;cursor:pointer;background:transparent;color:var(--on-surface-variant);transition:all 0.15s;}
     .scenario-btn.active{background:var(--surface);color:var(--primary);box-shadow:0 1px 4px rgba(0,0,0,0.1);}
+    .modal-footer{padding:16px 24px;border-top:1px solid var(--outline-variant);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;}
 
     .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);background:#1A1B1F;color:#fff;padding:12px 24px;border-radius:24px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;z-index:200;white-space:nowrap;}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
     .toast .material-symbols-outlined{font-size:18px;color:var(--success);}
-
     .proto-banner{background:var(--primary-container);border-top:1px solid var(--outline-variant);padding:10px 24px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--on-primary-container);flex-shrink:0;}
-
-    /* BACK BUTTON + BREADCRUMB */
-    .breadcrumb-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;min-height:36px;}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:transparent;color:var(--primary);border:1.5px solid var(--primary);border-radius:20px;font-size:13px;font-weight:500;font-family:'Roboto',sans-serif;cursor:pointer;transition:background 0.15s;}
-    .back-btn:hover{background:var(--primary-container);}
-    .back-btn .material-symbols-outlined{font-size:18px;}
-    .breadcrumb-trail{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--on-surface-variant);}
-    .crumb{color:var(--on-surface-variant);}
-    .crumb.active{color:var(--on-surface);font-weight:500;}
-    .crumb.link{color:var(--primary);cursor:pointer;}
-    .crumb.link:hover{text-decoration:underline;}
-    .crumb-sep{font-size:16px;color:var(--outline-variant);}
-
-    /* SENT STATE VIEW */
-    .sent-view{background:var(--surface);border:1px solid var(--outline-variant);border-radius:16px;padding:32px;text-align:center;max-width:480px;margin:0 auto;}
-    .sent-view-icon{width:64px;height:64px;border-radius:50%;background:var(--success-container);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
-    .sent-view-icon .material-symbols-outlined{font-size:32px;color:var(--success);}
-    .sent-view-title{font-size:18px;font-weight:500;margin-bottom:8px;}
-    .sent-view-sub{font-size:14px;color:var(--on-surface-variant);line-height:1.6;margin-bottom:24px;}
-    .sent-view-detail{background:var(--surface-container-low);border-radius:10px;padding:14px 18px;text-align:left;margin-bottom:20px;}
-    .sent-view-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--outline-variant);}
-    .sent-view-row:last-child{border-bottom:none;}
-    .sent-view-label{color:var(--on-surface-variant);}
   </style>
 </head>
 <body>
@@ -139,23 +108,6 @@
   </div>
 
   <div class="content">
-
-    <!-- BREADCRUMB / BACK NAV -->
-    <div id="breadcrumb" class="breadcrumb-bar">
-      <button class="back-btn" id="backBtn" onclick="goBack()" style="display:none;">
-        <span class="material-symbols-outlined">arrow_back</span>
-        Back
-      </button>
-      <div class="breadcrumb-trail" id="breadcrumbTrail">
-        <span class="crumb active">Yearly Policy Breakdown</span>
-      </div>
-    </div>
-
-    <!-- STATES WRAPPER -->
-    <div id="stateWrapper">
-
-    <!-- STATE 1: Main form -->
-    <div id="state1">
     <div class="section-title">Admin Sends DBR Notice</div>
 
     <div class="field-grid">
@@ -205,9 +157,6 @@
     </div>
   </div>
 
-    </div><!-- /state1 -->
-    </div><!-- /stateWrapper -->
-
   <!-- CONFIRM SEND MODAL -->
   <div class="modal-overlay" id="confirmModal">
     <div class="modal">
@@ -217,104 +166,48 @@
       </div>
       <div class="modal-body">
         <p>You are about to send a <strong>Death Benefit Reduction notice</strong>. Please confirm the details and expected signers below.</p>
-
-        <!-- Policy details -->
-        <div class="modal-row"><span class="modal-row-label">Policy</span><strong class="modal-row-value">LS22972246</strong></div>
-        <div class="modal-row"><span class="modal-row-label">Client</span><strong class="modal-row-value">John Smith</strong></div>
-        <div class="modal-row"><span class="modal-row-label">DBR Amount</span><strong class="modal-row-value" id="modalAmt">$0.00</strong></div>
-
-        <!-- Scenario toggle -->
+        <div class="modal-row"><span class="modal-row-label">Policy</span><strong>LS22972246</strong></div>
+        <div class="modal-row"><span class="modal-row-label">Client</span><strong>John Smith</strong></div>
+        <div class="modal-row"><span class="modal-row-label">DBR Amount</span><strong id="modalAmt">$0.00</strong></div>
         <div class="scenario-bar" style="margin-top:20px;">
-          <button class="scenario-btn active" onclick="setScenario('same', this)">Client = Settlor</button>
-          <button class="scenario-btn" onclick="setScenario('separate', this)">Separate Settlor</button>
+          <button class="scenario-btn active" onclick="setScenario('same',this)">Client = Settlor</button>
+          <button class="scenario-btn" onclick="setScenario('separate',this)">Separate Settlor</button>
         </div>
-
-        <!-- SCENARIO A: Client IS the Settlor -->
         <div id="scenarioSame">
           <div class="signer-section">
             <div class="signer-section-title">Expected Signers</div>
             <div class="signer-card same-person">
-              <span class="signer-badge combined">
-                <span class="material-symbols-outlined" style="font-size:12px">person</span>
-                Client & Settlor — Same Person
-              </span>
-              <div class="signer-row">
-                <span class="signer-label">Name</span>
-                <span class="signer-value">John Smith</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Email</span>
-                <span class="signer-value">john.smith@email.com</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Signs</span>
-                <span class="signer-value">DBR Election + Hold Harmless</span>
-              </div>
-              <div class="same-note">
-                <span class="material-symbols-outlined">info</span>
-                Client is also the Settlor — both sections sent in one signing ceremony.
-              </div>
+              <span class="signer-badge combined"><span class="material-symbols-outlined" style="font-size:12px">person</span>Client & Settlor — Same Person</span>
+              <div class="signer-row"><span class="signer-label">Name</span><span class="signer-value">John Smith</span></div>
+              <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">john.smith@email.com</span></div>
+              <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">DBR Election + Hold Harmless</span></div>
+              <div class="same-note"><span class="material-symbols-outlined">info</span>Both sections sent in one signing ceremony.</div>
             </div>
           </div>
         </div>
-
-        <!-- SCENARIO B: Separate Settlor -->
         <div id="scenarioSeparate" style="display:none;">
           <div class="signer-section">
             <div class="signer-section-title">Expected Signers</div>
-
-            <!-- Client signer -->
             <div class="signer-card">
-              <span class="signer-badge client">
-                <span class="material-symbols-outlined" style="font-size:12px">person</span>
-                Client Signer
-              </span>
-              <div class="signer-row">
-                <span class="signer-label">Name</span>
-                <span class="signer-value">John Smith</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Email</span>
-                <span class="signer-value">john.smith@email.com</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Signs</span>
-                <span class="signer-value">DBR Election Form</span>
-              </div>
+              <span class="signer-badge client"><span class="material-symbols-outlined" style="font-size:12px">person</span>Client Signer</span>
+              <div class="signer-row"><span class="signer-label">Name</span><span class="signer-value">John Smith</span></div>
+              <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">john.smith@email.com</span></div>
+              <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">DBR Election Form</span></div>
             </div>
-
-            <!-- Settlor signer -->
             <div class="signer-card">
-              <span class="signer-badge settlor">
-                <span class="material-symbols-outlined" style="font-size:12px">account_balance</span>
-                Settlor — Authorized Signer
-              </span>
-              <div class="signer-row">
-                <span class="signer-label">Settlor Name</span>
-                <span class="signer-value">Smith Family Trust</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Authorized Signer</span>
-                <span class="signer-value">Robert Smith (Trustee)</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Email</span>
-                <span class="signer-value">robert.smith@email.com</span>
-              </div>
-              <div class="signer-row">
-                <span class="signer-label">Signs</span>
-                <span class="signer-value">Hold Harmless & Indemnification</span>
-              </div>
+              <span class="signer-badge settlor"><span class="material-symbols-outlined" style="font-size:12px">account_balance</span>Settlor — Authorized Signer</span>
+              <div class="signer-row"><span class="signer-label">Settlor Name</span><span class="signer-value">Smith Family Trust</span></div>
+              <div class="signer-row"><span class="signer-label">Authorized Signer</span><span class="signer-value">Robert Smith (Trustee)</span></div>
+              <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">robert.smith@email.com</span></div>
+              <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">Hold Harmless & Indemnification</span></div>
             </div>
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button class="btn-outlined" onclick="closeModal('confirmModal')">Cancel</button>
         <button class="btn-primary" onclick="confirmSend()">
-          <span class="material-symbols-outlined" style="font-size:16px">send</span>
-          Confirm Send
+          <span class="material-symbols-outlined" style="font-size:16px">send</span>Confirm Send
         </button>
       </div>
     </div>
@@ -328,55 +221,37 @@
         <button class="modal-close" onclick="closeModal('resendModal')">close</button>
       </div>
       <div class="modal-body">
-        <p>A notice was already sent for this policy year. Are you sure you want to <strong>resend</strong> to the client?</p>
+        <p>A notice was already sent. Are you sure you want to <strong>resend</strong> to the client?</p>
         <div class="modal-row"><span class="modal-row-label">Policy</span><strong>LS22972246</strong></div>
         <div class="modal-row"><span class="modal-row-label">Client</span><strong>John Smith</strong></div>
         <div class="modal-row"><span class="modal-row-label">Originally sent</span><strong id="resendTime"></strong></div>
-
-        <!-- Scenario toggle -->
         <div class="scenario-bar" style="margin-top:20px;">
-          <button class="scenario-btn active" onclick="setResendScenario('same', this)">Client = Settlor</button>
-          <button class="scenario-btn" onclick="setResendScenario('separate', this)">Separate Settlor</button>
+          <button class="scenario-btn active" onclick="setResendScenario('same',this)">Client = Settlor</button>
+          <button class="scenario-btn" onclick="setResendScenario('separate',this)">Separate Settlor</button>
         </div>
-
-        <!-- SCENARIO A: Client IS the Settlor -->
         <div id="resendScenarioSame">
           <div class="signer-section">
             <div class="signer-section-title">Expected Signers</div>
             <div class="signer-card same-person">
-              <span class="signer-badge combined">
-                <span class="material-symbols-outlined" style="font-size:12px">person</span>
-                Client & Settlor — Same Person
-              </span>
+              <span class="signer-badge combined"><span class="material-symbols-outlined" style="font-size:12px">person</span>Client & Settlor — Same Person</span>
               <div class="signer-row"><span class="signer-label">Name</span><span class="signer-value">John Smith</span></div>
               <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">john.smith@email.com</span></div>
               <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">DBR Election + Hold Harmless</span></div>
-              <div class="same-note">
-                <span class="material-symbols-outlined">info</span>
-                Client is also the Settlor — both sections sent in one signing ceremony.
-              </div>
+              <div class="same-note"><span class="material-symbols-outlined">info</span>Both sections sent in one signing ceremony.</div>
             </div>
           </div>
         </div>
-
-        <!-- SCENARIO B: Separate Settlor -->
         <div id="resendScenarioSeparate" style="display:none;">
           <div class="signer-section">
             <div class="signer-section-title">Expected Signers</div>
             <div class="signer-card">
-              <span class="signer-badge client">
-                <span class="material-symbols-outlined" style="font-size:12px">person</span>
-                Client Signer
-              </span>
+              <span class="signer-badge client"><span class="material-symbols-outlined" style="font-size:12px">person</span>Client Signer</span>
               <div class="signer-row"><span class="signer-label">Name</span><span class="signer-value">John Smith</span></div>
               <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">john.smith@email.com</span></div>
               <div class="signer-row"><span class="signer-label">Signs</span><span class="signer-value">DBR Election Form</span></div>
             </div>
             <div class="signer-card">
-              <span class="signer-badge settlor">
-                <span class="material-symbols-outlined" style="font-size:12px">account_balance</span>
-                Settlor — Authorized Signer
-              </span>
+              <span class="signer-badge settlor"><span class="material-symbols-outlined" style="font-size:12px">account_balance</span>Settlor — Authorized Signer</span>
               <div class="signer-row"><span class="signer-label">Settlor Name</span><span class="signer-value">Smith Family Trust</span></div>
               <div class="signer-row"><span class="signer-label">Authorized Signer</span><span class="signer-value">Robert Smith (Trustee)</span></div>
               <div class="signer-row"><span class="signer-label">Email</span><span class="signer-value">robert.smith@email.com</span></div>
@@ -384,13 +259,11 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button class="btn-outlined" onclick="closeModal('resendModal')">Cancel</button>
         <button class="btn-primary" onclick="confirmResend()">
-          <span class="material-symbols-outlined" style="font-size:16px">refresh</span>
-          Resend Notice
+          <span class="material-symbols-outlined" style="font-size:16px">refresh</span>Resend Notice
         </button>
       </div>
     </div>
@@ -403,52 +276,11 @@
 
   <div class="proto-banner">
     <span class="material-symbols-outlined" style="font-size:16px;color:var(--primary)">construction</span>
-    <span><strong>Prototype</strong> — Admin Sends DBR Notice Function · ILIA Design Kit v1.0</span>
+    <span><strong>Prototype</strong> — Admin Sends DBR Notice Function · ILIA Design Kit v1.0 · NIW / Simplicity Group</span>
   </div>
 
   <script>
     let sentTime = null;
-    let stateHistory = ['state1'];
-    let breadcrumbHistory = ['Yearly Policy Breakdown'];
-
-    function goBack() {
-      if (stateHistory.length <= 1) return;
-      // Hide current state
-      const currentState = stateHistory[stateHistory.length - 1];
-      document.getElementById(currentState).style.display = 'none';
-      stateHistory.pop();
-      breadcrumbHistory.pop();
-      // Show previous state
-      const prevState = stateHistory[stateHistory.length - 1];
-      document.getElementById(prevState).style.display = 'block';
-      updateBreadcrumb();
-    }
-
-    function updateBreadcrumb() {
-      const trail = document.getElementById('breadcrumbTrail');
-      const backBtn = document.getElementById('backBtn');
-      // Show back button only if not on first state
-      backBtn.style.display = stateHistory.length > 1 ? 'inline-flex' : 'none';
-      // Build breadcrumb
-      trail.innerHTML = breadcrumbHistory.map((crumb, i) => {
-        const isLast = i === breadcrumbHistory.length - 1;
-        const sep = i > 0 ? '<span class="crumb-sep">›</span>' : '';
-        return sep + `<span class="crumb ${isLast ? 'active' : 'link'}" onclick="${!isLast ? `jumpTo(${i})` : ''}">${crumb}</span>`;
-      }).join('');
-    }
-
-    function jumpTo(index) {
-      // Navigate back to a specific breadcrumb point
-      while (stateHistory.length > index + 1) {
-        const currentState = stateHistory[stateHistory.length - 1];
-        document.getElementById(currentState).style.display = 'none';
-        stateHistory.pop();
-        breadcrumbHistory.pop();
-      }
-      const targetState = stateHistory[stateHistory.length - 1];
-      document.getElementById(targetState).style.display = 'block';
-      updateBreadcrumb();
-    }
 
     function setScenario(type, btn) {
       document.querySelectorAll('#confirmModal .scenario-btn').forEach(b => b.classList.remove('active'));
@@ -462,7 +294,6 @@
       document.getElementById('resendScenarioSame').style.display = type === 'same' ? 'block' : 'none';
       document.getElementById('resendScenarioSeparate').style.display = type === 'separate' ? 'block' : 'none';
     }
-
     function openConfirm() {
       document.getElementById('modalAmt').textContent = '$ ' + (document.getElementById('dbrAmount').value || '0.00');
       document.getElementById('confirmModal').classList.add('open');
@@ -472,44 +303,13 @@
       document.getElementById('resendModal').classList.add('open');
     }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
     function confirmSend() {
       closeModal('confirmModal');
       sentTime = new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
-      // Navigate to sent confirmation state
-      document.getElementById('state1').style.display = 'none';
-      // Create state2 if not exists
-      if (!document.getElementById('state2')) {
-        const s2 = document.createElement('div');
-        s2.id = 'state2';
-        s2.innerHTML = `
-          <div class="sent-view">
-            <div class="sent-view-icon"><span class="material-symbols-outlined">check_circle</span></div>
-            <div class="sent-view-title">DBR Notice Sent Successfully</div>
-            <div class="sent-view-sub">The Death Benefit Reduction notice has been sent to the client and settlor for signature.</div>
-            <div class="sent-view-detail">
-              <div class="sent-view-row"><span class="sent-view-label">Sent at</span><strong>${sentTime}</strong></div>
-              <div class="sent-view-row"><span class="sent-view-label">Policy</span><strong>LS22972246</strong></div>
-              <div class="sent-view-row"><span class="sent-view-label">Client notified</span><strong>john.smith@email.com</strong></div>
-              <div class="sent-view-row"><span class="sent-view-label">Settlor notified</span><strong>robert.smith@email.com</strong></div>
-              <div class="sent-view-row"><span class="sent-view-label">Status</span><strong style="color:var(--success)">Awaiting signatures</strong></div>
-            </div>
-            <button class="btn-outlined" onclick="jumpTo(0)" style="width:100%;justify-content:center;">
-              <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span>
-              Back to Policy Breakdown
-            </button>
-          </div>`;
-        document.getElementById('stateWrapper').appendChild(s2);
-      } else {
-        document.getElementById('state2').style.display = 'block';
-      }
-      stateHistory.push('state2');
-      breadcrumbHistory.push('Notice Sent');
-      updateBreadcrumb();
-      // Also update main form state
+      document.getElementById('sentTimestamp').textContent = 'Sent ' + sentTime;
       document.getElementById('notSentState').style.display = 'none';
       document.getElementById('sentState').style.display = 'flex';
-      document.getElementById('sentTimestamp').textContent = 'Sent ' + sentTime;
+      showToast('DBR Notice sent successfully');
     }
     function confirmResend() {
       closeModal('resendModal');
