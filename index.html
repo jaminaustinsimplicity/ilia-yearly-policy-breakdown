@@ -73,6 +73,13 @@
     .modal-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--outline-variant);font-size:13px;gap:16px;}
     .modal-row:last-of-type{border-bottom:none;}
     .modal-row-label{color:var(--on-surface-variant);flex-shrink:0;}
+    .modal-row-editable{border-bottom:none;padding-bottom:4px;}
+    .edit-hint{display:inline-block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--primary);background:var(--primary-container);border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:1px;}
+    .amt-edit-wrap{display:inline-flex;align-items:center;gap:2px;border:1.5px solid var(--primary);border-radius:8px;padding:5px 10px;background:var(--surface);transition:box-shadow .15s;}
+    .amt-edit-wrap:focus-within{box-shadow:0 0 0 3px var(--primary-container);}
+    .amt-prefix{font-size:14px;font-weight:600;color:var(--on-surface);}
+    .amt-input{border:none;outline:none;background:transparent;font-family:inherit;font-size:14px;font-weight:600;color:var(--on-surface);width:90px;text-align:right;}
+    .amt-note{font-size:11px;color:var(--on-surface-variant);background:var(--surface-container-low);border-radius:8px;padding:7px 10px;margin:2px 0 4px;line-height:1.4;}
     .signer-section{margin-top:16px;}
     .signer-section-title{font-size:11px;font-weight:500;color:var(--primary);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--primary-container);}
     .signer-card{background:var(--surface-container-low);border:1px solid var(--outline-variant);border-radius:10px;padding:12px 16px;margin-bottom:10px;}
@@ -168,7 +175,14 @@
         <p>You are about to send a <strong>Death Benefit Reduction notice</strong>. Please confirm the details and expected signers below.</p>
         <div class="modal-row"><span class="modal-row-label">Policy</span><strong>LS22972246</strong></div>
         <div class="modal-row"><span class="modal-row-label">Client</span><strong>John Smith</strong></div>
-        <div class="modal-row"><span class="modal-row-label">DBR Amount</span><strong id="modalAmt">$0.00</strong></div>
+        <div class="modal-row modal-row-editable">
+          <span class="modal-row-label">DBR Amount <span class="edit-hint">Editable</span></span>
+          <div class="amt-edit-wrap">
+            <span class="amt-prefix">$</span>
+            <input class="amt-input" id="modalAmtInput" type="text" inputmode="decimal" value="0.00" oninput="formatModalAmt(this)" onblur="normalizeModalAmt(this)"/>
+          </div>
+        </div>
+        <div class="amt-note"><span class="material-symbols-outlined" style="font-size:13px;vertical-align:-2px">info</span> Confirm or adjust the reduction amount before sending — this value is written to the DocuSign form.</div>
         <div class="scenario-bar" style="margin-top:20px;">
           <button class="scenario-btn active" onclick="setScenario('same',this)">Client = Settlor</button>
           <button class="scenario-btn" onclick="setScenario('separate',this)">Separate Settlor</button>
@@ -295,8 +309,22 @@
       document.getElementById('resendScenarioSeparate').style.display = type === 'separate' ? 'block' : 'none';
     }
     function openConfirm() {
-      document.getElementById('modalAmt').textContent = '$ ' + (document.getElementById('dbrAmount').value || '0.00');
+      // Pre-fill the editable amount from the page's DBR amount field
+      var pageVal = (document.getElementById('dbrAmount').value || '0.00').replace(/[^0-9.]/g,'');
+      document.getElementById('modalAmtInput').value = pageVal || '0.00';
       document.getElementById('confirmModal').classList.add('open');
+    }
+    function formatModalAmt(el) {
+      // allow only digits and a single decimal point while typing
+      var v = el.value.replace(/[^0-9.]/g,'');
+      var parts = v.split('.');
+      if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
+      el.value = v;
+    }
+    function normalizeModalAmt(el) {
+      var n = parseFloat(el.value.replace(/[^0-9.]/g,''));
+      if (isNaN(n)) n = 0;
+      el.value = n.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
     }
     function openResend() {
       document.getElementById('resendTime').textContent = sentTime;
@@ -304,12 +332,17 @@
     }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
     function confirmSend() {
+      // Write the (possibly edited) amount back to the page's DBR field
+      var edited = parseFloat(document.getElementById('modalAmtInput').value.replace(/[^0-9.]/g,''));
+      if (isNaN(edited)) edited = 0;
+      var formatted = edited.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById('dbrAmount').value = formatted;
       closeModal('confirmModal');
       sentTime = new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
       document.getElementById('sentTimestamp').textContent = 'Sent ' + sentTime;
       document.getElementById('notSentState').style.display = 'none';
       document.getElementById('sentState').style.display = 'flex';
-      showToast('DBR Notice sent successfully');
+      showToast('DBR Notice sent — amount $' + formatted);
     }
     function confirmResend() {
       closeModal('resendModal');
